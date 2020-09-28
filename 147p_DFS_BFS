@@ -1,0 +1,66 @@
+# 재귀 DFS 
+def dfs(graph, v, visited):
+  # 현재 노드 방문 처리 및 출력
+  visited[v] = True
+  print(v, end = ' ')
+
+  for i in graph[v-1]:
+    if visited[i] == False:
+      dfs(graph, i, visited)
+
+
+graph = [[2, 3, 8],
+         [1, 7],
+         [1, 4, 5],
+         [3, 5],
+         [3, 4],
+         [7],
+         [2, 6, 8],
+         [1, 7]]
+
+# 각 노드의 방문 여부를 1차원 리스트로 표현
+# 1번 노드의 인덱스를 1로 하기 위해, 정점이 8개 이지만 9개를 생성
+visited = [False] * 9
+
+dfs(graph, 1, visited)
+print()
+
+
+# BFS
+
+from collections import deque
+
+def bfs(graph, v, visited):
+  global queue
+
+  queue.append(v)
+  visited[v] = True
+
+  # 큐가 빌 때 까지 반복
+  while queue:
+
+    tmp = queue.popleft()
+    print(tmp, end = ' ')
+
+    for i in graph[tmp-1]:
+      if visited[i] == False:
+        queue.append(i)
+        visited[i] = True
+        
+
+queue = deque()
+
+graph = [[2, 3, 8],
+         [1, 7],
+         [1, 4, 5],
+         [3, 5],
+         [3, 4],
+         [7],
+         [2, 6, 8],
+         [1, 7]]
+
+# 각 노드의 방문 여부를 1차원 리스트로 표현
+# 1번 노드의 인덱스를 1로 하기 위해, 정점이 8개 이지만 9개를 생성
+visited = [False] * 9
+
+bfs(graph, 1, visited)
