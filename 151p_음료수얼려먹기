@@ -1,0 +1,36 @@
+# 149p 음료수 얼려 먹기
+
+n, m = map(int, input().split())
+
+ice = []
+for i in range(n):
+  ice.append(list(map(int, input())))
+
+for i in range(n):
+  print(ice[i])
+
+def dfs(ice, i, j):
+
+  # 범위를 벗어나거나 이미 왔던 block 이라면 return 처리
+  if (i < 0) or (j < 0) or (i >= n) or (j >= m) or (ice[i][j] == 1):
+    return
+
+  # visited(방문) 처리
+  ice[i][j] = 1
+
+  # 4방향에 대한 재귀적 호출
+  dfs(ice, i+1, j)
+  dfs(ice, i-1, j)
+  dfs(ice, i, j+1)
+  dfs(ice, i, j-1)
+
+cnt = 0
+
+for i in range(n):
+  for j in range(m):
+    # 탐색해본 적 없는 블록을 마주쳤다면
+    if 0 == ice[i][j]:
+      cnt += 1
+      dfs(ice, i, j)
+
+print(cnt)
