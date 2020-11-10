@@ -1,0 +1,36 @@
+# Quick Sort - 퀵 정렬(164p)
+# 직관적인 코드
+
+num_list = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
+
+def quick_sort(num_list, start, end):
+
+  left, right = start+1, end-1
+  if start >= end:
+    return
+
+  pivot = num_list[start]
+
+  while left <= right:
+
+    while pivot > num_list[left] and left < end-1:
+      left = left + 1
+
+    while pivot < num_list[right] and right > start:
+      right = right - 1
+
+
+    # 엇갈렸다면
+    if left >= right:
+      num_list[right], num_list[start] = num_list[start], num_list[right]
+      break
+    else:
+      num_list[left], num_list[right] = num_list[right], num_list[left]
+      
+
+  quick_sort(num_list, start, left-1)
+  quick_sort(num_list, left+1, end)
+
+quick_sort(num_list, 0, len(num_list))
+
+print(num_list)
